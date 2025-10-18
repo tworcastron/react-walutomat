@@ -16,7 +16,7 @@ export default function Layout(props) {
       <main>
         {content}
       </main>
-      <footer>{footer}</footer>
+      <footer style={{ marginTop: 20 }}>{footer}</footer>
     </div>
   )
 }
