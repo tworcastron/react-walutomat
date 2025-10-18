@@ -11,8 +11,13 @@ export default function Currencies() {
   const [amount, setAmount] = useState(1)
 
   // Usuwanie
+  const deleteCurrency = (id) => {
+    const updatedCurrencies = currencies.filter(c => c.id !== id)
+    setCurrencies(updatedCurrencies)
+  }
 
   // Edycja
+  const [editId, setEditId] = useState(null)
 
   return (
     <div>
@@ -35,13 +40,22 @@ export default function Currencies() {
         </thead>
         <tbody>
           {currencies.map(currency => (
-            <Currency key={currency.id} {...currency} amount={amount} />
+            <Currency
+              key={currency.id}
+              {...currency}
+              amount={amount}
+              onDelete={deleteCurrency}
+              onEdit={setEditId}
+            />
           ))}
         </tbody>
       </table>
 
       <button className="btn btn-secondary">Dodaj walutę</button>
-      
+
+      {/* modale */}
+        {!!editId && 'edytuj modal'}
+
     </div>
   )
 }
