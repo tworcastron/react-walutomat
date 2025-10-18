@@ -1,10 +1,10 @@
 import { useState } from "react"
 import FormInput from "../../UI/FormInput/FormInput"
 
-export default function CurrencyForm({ onSave }) {
-  const [name, setName] = useState('')
-  const [symbol, setSymbol] = useState('')
-  const [rate, setRate] = useState('')
+export default function CurrencyForm({ onSave, item }) {
+  const [name, setName] = useState(item?.name ?? '')
+  const [symbol, setSymbol] = useState(item?.symbol ?? '')
+  const [rate, setRate] = useState(item?.rate ?? '')
 
   const submit = (e) => {
     e.preventDefault()

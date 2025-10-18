@@ -36,6 +36,18 @@ export default function Currencies() {
   // Edycja
   const [editId, setEditId] = useState(null)
 
+  const editCurrency = (id, values) => {
+    const index = currencies.findIndex(c => c.id === id)
+
+    if (index !== -1) {
+      const copy = structuredClone(currencies)
+      copy[index] = { ...copy[index], ...values }
+
+      setCurrencies(copy)
+      setEditId(null)
+    }
+  }
+
   return (
     <div>
       <h1>Waluty</h1>
@@ -79,8 +91,12 @@ export default function Currencies() {
       <Modal
         isOpen={!!editId} 
         title="Edytuj walutę" 
-        onClose={() => setEditId(null)}>
-        formularz edycji
+        onClose={() => setEditId(null)}
+      >
+        <CurrencyForm
+          onSave={values => editCurrency(editId, values)}
+          item={currencies.find(c => c.id === editId)}
+        />
       </Modal>
 
       <Modal
