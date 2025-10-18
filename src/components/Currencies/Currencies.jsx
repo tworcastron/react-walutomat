@@ -1,6 +1,8 @@
 import { useState } from "react"
 import Currency from "./Currency/Currency"
 import Modal from "../UI/Modal/Modal"
+import FormInput from "../UI/FormInput/FormInput"
+import CurrencyForm from "./CurrencyForm/CurrencyForm"
 
 export default function Currencies() {
   // Wszystkie waluty
@@ -10,7 +12,20 @@ export default function Currencies() {
 
   // Dodawanie
   const [amount, setAmount] = useState(1)
-  const [showAddModal, setShowAddModal] = useState(false)
+  const [showAddModal, setShowAddModal] = useState(true)
+
+  const addCurrency = (values) => {
+    const newCurrency = {
+      id: Math.random(),
+      name: values.name,
+      symbol: values.symbol,
+      rate: values.rate,
+      // ...values,
+    }
+
+    setCurrencies([...currencies, newCurrency])
+    setShowAddModal(false)
+  }
 
   // Usuwanie
   const deleteCurrency = (id) => {
@@ -25,10 +40,12 @@ export default function Currencies() {
     <div>
       <h1>Waluty</h1>
 
-      <div className="mb-3">
-        <label htmlFor="" className="form-label">Wpisz kwotę PLN do przeliczenia</label>
-        <input type="number" className="form-control" value={amount} onChange={e => setAmount(e.target.value)} />
-      </div>
+      <FormInput
+        label="Wpisz kwotę PLN do przeliczenia"
+        type="number"
+        value={amount}
+        onChange={val => setAmount(val)}
+      />
 
       <table className="table">
         <thead>
@@ -69,8 +86,9 @@ export default function Currencies() {
       <Modal
         isOpen={showAddModal} 
         title="Dodaj walutę" 
-        onClose={() => setShowAddModal(false)}>
-        formularz dodawnaia
+        onClose={() => setShowAddModal(false)}
+      >
+        <CurrencyForm onSave={values => addCurrency(values)} />
       </Modal>
 
     </div>
