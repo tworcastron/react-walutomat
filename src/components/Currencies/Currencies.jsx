@@ -1,7 +1,18 @@
+import { useState } from "react"
 import Currency from "./Currency/Currency"
 
 export default function Currencies() {
-  const currencies = [1,2]
+  // Wszystkie waluty
+  const [currencies, setCurrencies] = useState([
+    { id: 1, name: 'Dolar', symbol: 'USD', rate: '3.6' }
+  ])
+
+  // Dodawanie
+  const [amount, setAmount] = useState(1)
+
+  // Usuwanie
+
+  // Edycja
 
   return (
     <div>
@@ -9,7 +20,7 @@ export default function Currencies() {
 
       <div className="mb-3">
         <label htmlFor="" className="form-label">Wpisz kwotę PLN do przeliczenia</label>
-        <input type="number" className="form-control" />
+        <input type="number" className="form-control" value={amount} onChange={e => setAmount(e.target.value)} />
       </div>
 
       <table className="table">
@@ -23,8 +34,8 @@ export default function Currencies() {
           </tr>
         </thead>
         <tbody>
-          {currencies.map(x => (
-            <Currency key={x} />
+          {currencies.map(currency => (
+            <Currency key={currency.id} {...currency} amount={amount} />
           ))}
         </tbody>
       </table>
