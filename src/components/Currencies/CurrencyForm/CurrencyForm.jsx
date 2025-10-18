@@ -24,18 +24,22 @@ export default function CurrencyForm({ onSave, item }) {
         label="Nazwa"
         value={name}
         onChange={setName}
+        validationRules={{ required: true }}
       />
       <FormInput
         label="Symbol"
         value={symbol}
         onChange={setSymbol}
         disabled={!name}
+        validationRules={{ required: true, maxLength: 3 }}
       />
       <FormInput
         label="Kurs"
         value={rate}
+        type="number"
         onChange={setRate}
         disabled={!symbol}
+        validationRules={{ required: true }}
       />
 
       <button className="btn btn-success" disabled={!isValid}>Gotowe</button>

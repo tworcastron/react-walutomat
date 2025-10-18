@@ -12,7 +12,7 @@ export default function Currencies() {
 
   // Dodawanie
   const [amount, setAmount] = useState(1)
-  const [showAddModal, setShowAddModal] = useState(true)
+  const [showAddModal, setShowAddModal] = useState(false)
 
   const addCurrency = (values) => {
     const newCurrency = {
