@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Currency from "./Currency/Currency"
+import Modal from "../UI/Modal/Modal"
 
 export default function Currencies() {
   // Wszystkie waluty
@@ -9,6 +10,7 @@ export default function Currencies() {
 
   // Dodawanie
   const [amount, setAmount] = useState(1)
+  const [showAddModal, setShowAddModal] = useState(false)
 
   // Usuwanie
   const deleteCurrency = (id) => {
@@ -51,10 +53,25 @@ export default function Currencies() {
         </tbody>
       </table>
 
-      <button className="btn btn-secondary">Dodaj walutę</button>
+      <button 
+        className="btn btn-secondary"
+        onClick={() => setShowAddModal(true)}
+      >Dodaj walutę</button>
 
       {/* modale */}
-        {!!editId && 'edytuj modal'}
+      <Modal
+        isOpen={!!editId} 
+        title="Edytuj walutę" 
+        onClose={() => setEditId(null)}>
+        formularz edycji
+      </Modal>
+
+      <Modal
+        isOpen={showAddModal} 
+        title="Dodaj walutę" 
+        onClose={() => setShowAddModal(false)}>
+        formularz dodawnaia
+      </Modal>
 
     </div>
   )
