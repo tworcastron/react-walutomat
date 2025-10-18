@@ -3,10 +3,11 @@ import Currency from "./Currency/Currency"
 import Modal from "../UI/Modal/Modal"
 import FormInput from "../UI/FormInput/FormInput"
 import CurrencyForm from "./CurrencyForm/CurrencyForm"
+import useLocaleStorage from "../../hooks/useLocalStorage"
 
 export default function Currencies() {
   // Wszystkie waluty
-  const [currencies, setCurrencies] = useState([
+  const [currencies, setCurrencies] = useLocaleStorage('items' ,[
     { id: 1, name: 'Dolar', symbol: 'USD', rate: '3.6' }
   ])
 
