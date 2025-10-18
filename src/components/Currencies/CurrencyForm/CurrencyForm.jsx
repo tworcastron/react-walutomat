@@ -1,5 +1,6 @@
 import { useState } from "react"
 import FormInput from "../../UI/FormInput/FormInput"
+import RateTracker from "../RateTracker/RateTracker"
 
 export default function CurrencyForm({ onSave, item }) {
   const [name, setName] = useState(item?.name ?? '')
@@ -33,14 +34,17 @@ export default function CurrencyForm({ onSave, item }) {
         disabled={!name}
         validationRules={{ required: true, maxLength: 3 }}
       />
-      <FormInput
-        label="Kurs"
-        value={rate}
-        type="number"
-        onChange={setRate}
-        disabled={!symbol}
-        validationRules={{ required: true }}
-      />
+      <div style={{ display: 'flex', gap: 10 }}>
+        <FormInput
+          label="Kurs"
+          value={rate}
+          type="number"
+          onChange={setRate}
+          disabled={!symbol}
+          validationRules={{ required: true }}
+        />
+        <RateTracker symbol={symbol} onFetch={setRate} />
+      </div>
 
       <button className="btn btn-success" disabled={!isValid}>Gotowe</button>
     </form>
